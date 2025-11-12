@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: authservice-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong@Passw0rd
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - authservice-network
+
+  postgres:
+    image: postgres:16
+    container_name: authservice-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=YourStrong@Passw0rd
+      - POSTGRES_DB=AuthServiceQuery
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - authservice-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: authservice-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__CommandDatabase=Server=sqlserver;Database=AuthServiceCommand;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
+      - ConnectionStrings__QueryDatabase=Host=postgres;Database=AuthServiceQuery;Username=postgres;Password=YourStrong@Passw0rd;
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sqlserver
+      - postgres
+    networks:
+      - authservice-network
+
+networks:
+  authservice-network:
+    driver: bridge
+
+volumes:
+  sqlserver-data:
+  postgres-data:
