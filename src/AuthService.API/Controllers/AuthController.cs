@@ -1,11 +1,14 @@
 using AuthService.API.Constants;
 using AuthService.Application.Common;
 using AuthService.Application.Features.Auth.ChangePassword;
+using AuthService.Application.Features.Auth.ExternalLogin;
 using AuthService.Application.Features.Auth.ForgotPassword;
 using AuthService.Application.Features.Auth.Login;
+using AuthService.Application.Features.Auth.Logout;
 using AuthService.Application.Features.Auth.Register;
 using AuthService.Application.Features.Auth.RefreshToken;
 using AuthService.Application.Features.Auth.ResetPassword;
+using AuthService.Application.Features.Auth.RevokeToken;
 using AuthService.Application.Features.Auth.VerifyEmail;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -47,9 +50,39 @@ public sealed class AuthController : ControllerBase
         return result.Success ? Ok(result) : BadRequest(result);
     }
 
+    [Authorize(Roles = Roles.AdminOrUser)]
+    [HttpPost("logout")]
+    public async Task<ActionResult<ApiResponse<LogoutResponse>>> Logout()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (!Guid.TryParse(userIdClaim, out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var command = new LogoutCommand(userId);
+        var result = await _mediator.Send(command);
+        return result.Success ? Ok(result) : BadRequest(result);
+    }
+
     [HttpPost("refresh-token")]
     public async Task<ActionResult<ApiResponse<RefreshTokenResponse>>> RefreshToken(RefreshTokenCommand command)
     {
+        var result = await _mediator.Send(command);
+        return result.Success ? Ok(result) : BadRequest(result);
+    }
+
+    [Authorize(Roles = Roles.AdminOrUser)]
+    [HttpPost("revoke-token")]
+    public async Task<ActionResult<ApiResponse<RevokeTokenResponse>>> RevokeToken()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (!Guid.TryParse(userIdClaim, out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var command = new RevokeTokenCommand(userId);
         var result = await _mediator.Send(command);
         return result.Success ? Ok(result) : BadRequest(result);
     }
@@ -78,6 +111,13 @@ public sealed class AuthController : ControllerBase
             return Forbid();
         }
 
+        var result = await _mediator.Send(command);
+        return result.Success ? Ok(result) : BadRequest(result);
+    }
+
+    [HttpPost("external-login")]
+    public async Task<ActionResult<ApiResponse<ExternalLoginResponse>>> ExternalLogin(ExternalLoginCommand command)
+    {
         var result = await _mediator.Send(command);
         return result.Success ? Ok(result) : BadRequest(result);
     }

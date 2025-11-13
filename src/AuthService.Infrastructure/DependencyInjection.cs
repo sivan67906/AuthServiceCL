@@ -74,7 +74,10 @@ public static class DependencyInjection
             };
         });
 
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        // Register specific repositories instead of generic repository
+        services.AddScoped<IUserAddressRepository, UserAddressRepository>();
+        services.AddScoped<IExternalLoginRepository, ExternalLoginRepository>();
+
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IEmailService, EmailService>();
 
