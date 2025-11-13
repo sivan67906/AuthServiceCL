@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace AuthService.Infrastructure.Persistence.Data.Migrations
+namespace AuthService.Infrastructure.Persistence.Data.Migrations.Command
 {
     /// <inheritdoc />
     public partial class InitialCommit : Migration
@@ -237,7 +237,7 @@ namespace AuthService.Infrastructure.Persistence.Data.Migrations
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "IsActive", "IsDeleted", "IsTwoFactorEnabled", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureUrl", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "TwoFactorSecretKey", "UpdatedAt", "UserName" },
-                values: new object[] { new Guid("33333333-3333-3333-3333-333333333333"), 0, "9e1f3d2c-7b4a-4c8e-bd2f-1a3e9f7c6d5b", new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@authservice.com", true, "System", true, false, false, "Administrator", false, null, "ADMIN@AUTHSERVICE.COM", "ADMIN@AUTHSERVICE.COM", "AQAAAAIAAYagAAAAEP9H9kHh4siUyNA11hbWyP/aJlC7rPjluGbrB2rWlLAsdIoi3i3kgtx3XT6+ftASiw==", null, false, null, null, null, "b6f3a9d2-1c4e-4b8f-9a7e-3d2f1c8b6a9e", false, null, null, "admin@authservice.com" });
+                values: new object[] { new Guid("33333333-3333-3333-3333-333333333333"), 0, "9e1f3d2c-7b4a-4c8e-bd2f-1a3e9f7c6d5b", new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@authservice.com", true, "System", true, false, false, "Administrator", false, null, "ADMIN@AUTHSERVICE.COM", "ADMIN@AUTHSERVICE.COM", "AQAAAAIAAYagAAAAELv8Xc55AlNmj7R5Wh1nMwu7YYwb9j/6j6FEDOpRgw33EkEK6xeNZyM5tWcKQRCMoA==", null, false, null, null, null, "b6f3a9d2-1c4e-4b8f-9a7e-3d2f1c8b6a9e", false, null, null, "admin@authservice.com" });
 
             migrationBuilder.InsertData(
                 table: "ApplicationUserRoles",

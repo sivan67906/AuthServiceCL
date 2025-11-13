@@ -4,19 +4,16 @@ using AuthService.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AuthService.Infrastructure.Persistence.Data.Migrations
+namespace AuthService.Infrastructure.Persistence.Data.Migrations.Command
 {
     [DbContext(typeof(CommandDbContext))]
-    [Migration("20251113070131_InitialCommit")]
-    partial class InitialCommit
+    partial class CommandDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,7 +199,7 @@ namespace AuthService.Infrastructure.Persistence.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@AUTHSERVICE.COM",
                             NormalizedUserName = "ADMIN@AUTHSERVICE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEP9H9kHh4siUyNA11hbWyP/aJlC7rPjluGbrB2rWlLAsdIoi3i3kgtx3XT6+ftASiw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELv8Xc55AlNmj7R5Wh1nMwu7YYwb9j/6j6FEDOpRgw33EkEK6xeNZyM5tWcKQRCMoA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "b6f3a9d2-1c4e-4b8f-9a7e-3d2f1c8b6a9e",
                             TwoFactorEnabled = false,

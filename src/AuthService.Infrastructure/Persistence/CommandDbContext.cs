@@ -104,7 +104,7 @@ public sealed class CommandDbContext : IdentityDbContext<
             }
         );
 
-        var passwordHasher = new PasswordHasher<ApplicationUser>();
+        //var passwordHasher = new PasswordHasher<ApplicationUser>();
         var adminUser = new ApplicationUser
         {
             Id = adminUserId,
@@ -120,7 +120,9 @@ public sealed class CommandDbContext : IdentityDbContext<
             SecurityStamp = "b6f3a9d2-1c4e-4b8f-9a7e-3d2f1c8b6a9e",
             ConcurrencyStamp = "9e1f3d2c-7b4a-4c8e-bd2f-1a3e9f7c6d5b"
         };
-        adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "Admin@123456");
+        //adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "Admin@123456");
+        adminUser.PasswordHash = "AQAAAAIAAYagAAAAELv8Xc55AlNmj7R5Wh1nMwu7YYwb9j/6j6FEDOpRgw33EkEK6xeNZyM5tWcKQRCMoA==";
+
 
         builder.Entity<ApplicationUser>().HasData(adminUser);
 

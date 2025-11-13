@@ -27,6 +27,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    // make schema ids unique across namespaces
+    c.CustomSchemaIds(type => type.FullName!.Replace('+', '.'));
     c.SwaggerDoc("v1", new() { Title = "AuthService API", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new()
     {

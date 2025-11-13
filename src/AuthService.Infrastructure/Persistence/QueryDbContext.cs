@@ -1,3 +1,4 @@
+using System.Reflection.Emit;
 using AuthService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,5 +42,22 @@ public sealed class QueryDbContext : DbContext
                 .WithMany()
                 .HasForeignKey(e => e.UserId);
         });
+        builder.Entity<ApplicationUserRole>(entity =>
+        {
+            entity.HasKey(e => new { e.UserId, e.RoleId });
+
+            entity.HasOne(ur => ur.User)
+                  .WithMany(u => u.UserRoles)
+                  .HasForeignKey(ur => ur.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(ur => ur.Role)
+                  .WithMany(r => r.UserRoles)
+                  .HasForeignKey(ur => ur.RoleId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.ToTable("ApplicationUserRoles");
+        });
+
     }
 }
