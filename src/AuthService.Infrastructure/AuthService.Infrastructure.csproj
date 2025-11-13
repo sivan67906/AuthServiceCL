@@ -22,4 +22,7 @@
     <ProjectReference Include="..\AuthService.Domain\AuthService.Domain.csproj" />
     <ProjectReference Include="..\AuthService.Application\AuthService.Application.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\Data\Migrations\" />
+  </ItemGroup>
 </Project>

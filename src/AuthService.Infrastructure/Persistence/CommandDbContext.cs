@@ -90,8 +90,8 @@ public sealed class CommandDbContext : IdentityDbContext<
                 Name = "Admin",
                 NormalizedName = "ADMIN",
                 Description = "Administrator role with full access",
-                CreatedAt = DateTime.UtcNow,
-                ConcurrencyStamp = Guid.NewGuid().ToString()
+                CreatedAt = new DateTime(2023, 01, 01),
+                ConcurrencyStamp = "3f9c1e3d-8b7a-4e6f-9c2e-2a1f4d8e9b6c"
             },
             new ApplicationRole
             {
@@ -99,8 +99,8 @@ public sealed class CommandDbContext : IdentityDbContext<
                 Name = "User",
                 NormalizedName = "USER",
                 Description = "Standard user role",
-                CreatedAt = DateTime.UtcNow,
-                ConcurrencyStamp = Guid.NewGuid().ToString()
+                CreatedAt = new DateTime(2023, 01, 01),
+                ConcurrencyStamp = "7a2d4f1c-3e8b-4c9f-bd3a-5e2c9a7f1d4e"
             }
         );
 
@@ -116,9 +116,9 @@ public sealed class CommandDbContext : IdentityDbContext<
             FirstName = "System",
             LastName = "Administrator",
             IsActive = true,
-            CreatedAt = DateTime.UtcNow,
-            SecurityStamp = Guid.NewGuid().ToString(),
-            ConcurrencyStamp = Guid.NewGuid().ToString()
+            CreatedAt = new DateTime(2023, 01, 05),
+            SecurityStamp = "b6f3a9d2-1c4e-4b8f-9a7e-3d2f1c8b6a9e",
+            ConcurrencyStamp = "9e1f3d2c-7b4a-4c8e-bd2f-1a3e9f7c6d5b"
         };
         adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "Admin@123456");
 
